@@ -49,7 +49,7 @@ class ApprisePlugin(SettingsMixin, InvenTreePlugin):
 
         def send_bulk(self):
             """Send the notifications out via slack."""
-            instance = registry.plugins.get(self.get_plugin().NAME.lower())
+            instance = registry.plugins.get(self.get_plugin().SLUG.lower())
             url = instance.get_setting('NOTIFICATION_APPRISE_URL')
 
             if not url:
