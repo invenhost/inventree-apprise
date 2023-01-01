@@ -1,9 +1,9 @@
 """Plugin to send notifications from InvenTree via Apprise."""
 
-from plugin import InvenTreePlugin, registry
-from plugin.mixins import SettingsMixin, BulkNotificationMethod
-from django.utils.translation import gettext_lazy as _
 import apprise
+from django.utils.translation import gettext_lazy as _
+from plugin import InvenTreePlugin, registry
+from plugin.mixins import BulkNotificationMethod, SettingsMixin
 
 
 class PlgMixin:
@@ -15,6 +15,7 @@ class PlgMixin:
     def get_plugin(self):
         """Return plugin reference."""
         return ApprisePlugin
+
 
 class ApprisePlugin(SettingsMixin, InvenTreePlugin):
     """Send notifications from InvenTree via Apprise."""
@@ -48,7 +49,6 @@ class ApprisePlugin(SettingsMixin, InvenTreePlugin):
 
         def send_bulk(self):
             """Send the notifications out via slack."""
-
             instance = registry.plugins.get(self.get_plugin().NAME.lower())
             url = instance.get_setting('NOTIFICATION_APPRISE_URL')
 
@@ -62,6 +62,6 @@ class ApprisePlugin(SettingsMixin, InvenTreePlugin):
                 apobj.add(notifiy_url)
 
             # Send notification out
-            ret = apobj.notify(body=str(self.context['message']),title=str(self.context['name']))
+            ret = apobj.notify(body=str(self.context['message']), title=str(self.context['name']))
 
             return bool(ret)
