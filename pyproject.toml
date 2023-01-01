@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools", "wheel", "pyyaml"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inventree-apprise"
+version =  "0.1a0"
+description=" Send notifications from InvenTree via Apprise "
+readme = "README.md"
+license = {text = "MIT"}
+keywords = ["inventree", "inventree-plugin", "apprise"]
+authors = [
+    {name = "Matthias J Mair", email =  "info@mjmair.com"}
+]
+classifiers=[
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Plugins",
+    "Framework :: Django",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Manufacturing",
+    "Intended Audience :: End Users/Desktop",
+    "Topic :: Scientific/Engineering",
+]
+requires-python=">=3.6"
+dependencies = ['apprise']
+
+[project.optional-dependencies]
+dev = ['twine', 'setuptools']
+
+[project.urls]
+repository = "https://github.com/matmair/inventree-apprise"
+"Bug Tracker" = "https://github.com/matmair/inventree-apprise/issues"
+
+[project.entry-points."inventree_plugins"]
+inventree-shopify = "inventree_apprise:ApprisePlugin.ApprisePlugin"
+
+[tool.setuptools.packages.find]
+where = ["src"]
