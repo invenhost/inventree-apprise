@@ -24,7 +24,7 @@ classifiers=[
     "Topic :: Scientific/Engineering",
 ]
 requires-python=">=3.6"
-dependencies = ['apprise']
+dependencies = ['django', 'apprise']
 
 [project.optional-dependencies]
 dev = ['twine', 'setuptools']
