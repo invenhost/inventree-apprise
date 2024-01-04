@@ -1,7 +1,7 @@
 name: Plugin action
 on:
   push:
-    branches: ['main']
+    branches: ['main', 'master']
   pull_request:
     types: [opened, edited, reopened]
   release:
@@ -9,5 +9,7 @@ on:
 
 jobs:
   plugin-action:
-    uses: matmair/inventree-meta-plugin/.github/workflows/plugin_action.yaml@main
-    secrets: inherit
+    name: CI
+    uses: matmair/inventree-meta-plugin/.github/workflows/plugin_action.yaml@next
+    secrets:
+      PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
