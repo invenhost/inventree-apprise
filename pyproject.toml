@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "inventree-apprise"
-version =  "1.0"
-description=" Send notifications from InvenTree via Apprise "
+version =  "1.1"
+description=" Send notifications from InvenTree via Apprise"
 readme = "README.md"
 license = {text = "MIT"}
 keywords = ["inventree", "inventree-plugin", "apprise"]
 authors = [
-    {name = "Matthias J Mair", email =  "info@mjmair.com"}
+    {name = "Matthias Mair", email =  "code@mjmair.com"}
 ]
 classifiers=[
     "Programming Language :: Python :: 3",
@@ -30,11 +30,32 @@ dependencies = ['django', 'apprise']
 dev = ['twine', 'setuptools']
 
 [project.urls]
-repository = "https://github.com/matmair/inventree-apprise"
-"Bug Tracker" = "https://github.com/matmair/inventree-apprise/issues"
+"Repository" = "https://github.com/invenhost/inventree-apprise"
+"Bug Tracker" = "https://github.com/invenhost/inventree-apprise/issues"
 
 [project.entry-points."inventree_plugins"]
 inventree-apprise = "inventree_apprise:ApprisePlugin"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.ruff]
+exclude=[".git","__pycache__","dist","build","test.py","tests", "venv","env",".venv",".env"]
+
+[tool.ruff.lint]
+select = ["A", "B", "C4", "D", "DJ", "N", "I","S"]
+ignore = ["N999", ]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+section-order = ["future", "standard-library", "django", "third-party", "first-party", "local-folder" ]
+known-first-party = ["src", "plugin", "InvenTree", "common"]
+
+[tool.ruff.lint.isort.sections]
+"django" = ["django"]
+
+[tool.check-wheel-contents]
+ignore = ['W004']
