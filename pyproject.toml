@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "inventree-apprise"
-version =  "1.1"
+version =  "1.2"
 description=" Send notifications from InvenTree via Apprise"
 readme = "README.md"
 license = {text = "MIT"}
