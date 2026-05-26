@@ -25,7 +25,7 @@ classifiers=[
     "Framework :: InvenTree",
 ]
 requires-python=">=3.9"
-dependencies = ['django', 'apprise']
+dependencies = ['apprise']
 
 [project.optional-dependencies]
 dev = ['twine', 'setuptools']
@@ -60,3 +60,8 @@ known-first-party = ["src", "plugin", "InvenTree", "common"]
 
 [tool.check-wheel-contents]
 ignore = ['W004']
+
+[dependency-groups]
+dev = [
+    "django>=4.2.30",
+]
