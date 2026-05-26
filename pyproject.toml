@@ -25,7 +25,7 @@ classifiers=[
     "Framework :: InvenTree",
 ]
 requires-python=">=3.9"
-dependencies = ['apprise']
+dependencies = ['apprise>=1.0.0,<2.0.0']
 
 [project.optional-dependencies]
 dev = ['twine', 'setuptools']
