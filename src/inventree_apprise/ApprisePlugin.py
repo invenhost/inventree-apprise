@@ -1,25 +1,21 @@
 """Plugin to send notifications from InvenTree via Apprise."""
 
+import logging
+
+from django.contrib.auth.models import User
+from django.db.models import Model
 from django.utils.translation import gettext_lazy as _
 
 import apprise
 
 from plugin import InvenTreePlugin, registry
-from plugin.mixins import BulkNotificationMethod, SettingsMixin
+from plugin.mixins import NotificationMixin, SettingsMixin
+
+# Logger configuration
+logger = logging.getLogger("inventree")
 
 
-class PlgMixin:
-    """Mixin to access plugin easier.
-
-    This needs to be spit out to reference the class. Perks of python.
-    """
-
-    def get_plugin(self):
-        """Return plugin reference."""
-        return ApprisePlugin
-
-
-class ApprisePlugin(SettingsMixin, InvenTreePlugin):
+class ApprisePlugin(NotificationMixin, SettingsMixin, InvenTreePlugin):
     """Send notifications from InvenTree via Apprise."""
 
     NAME = "ApprisePlugin"
@@ -41,33 +37,29 @@ class ApprisePlugin(SettingsMixin, InvenTreePlugin):
         },
     }
 
-    class SlackNotification(PlgMixin, BulkNotificationMethod):
-        """Notificationmethod for delivery via Apprise."""
+    def send_notification(
+        self, target: Model, category: str, users: list[User], context: dict
+    ) -> bool:
+        """Send the notifications out via slack."""
+        if not self.get_setting("ENABLE_NOTIFICATION_APPRISE"):
+            logger.debug("Apprise notifications are disabled")
+            return False
 
-        METHOD_NAME = "apprise"
-        GLOBAL_SETTING = "ENABLE_NOTIFICATION_APPRISE"
+        url = self.get_setting("NOTIFICATION_APPRISE_URL")
 
-        def get_targets(self):
-            """Not used by this method."""
-            return self.targets
+        if not url:
+            return False
 
-        def send_bulk(self):
-            """Send the notifications out via slack."""
-            instance = registry.plugins.get(self.get_plugin().SLUG.lower())
-            url = instance.get_setting("NOTIFICATION_APPRISE_URL")
+        # Apprise specific stuff from here on out
+        apobj = apprise.Apprise()
 
-            if not url:
-                return False
+        # Add all of the notification services
+        for notifiy_url in url.split(";"):
+            apobj.add(notifiy_url)
 
-            apobj = apprise.Apprise()
+        # Send notification out
+        ret = apobj.notify(
+            body=str(self.context["message"]), title=str(self.context["name"])
+        )
 
-            # Add all of the notification services
-            for notifiy_url in url.split(";"):
-                apobj.add(notifiy_url)
-
-            # Send notification out
-            ret = apobj.notify(
-                body=str(self.context["message"]), title=str(self.context["name"])
-            )
-
-            return bool(ret)
+        return bool(ret)
