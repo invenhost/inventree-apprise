@@ -13,3 +13,5 @@ jobs:
     uses: matmair/inventree-meta-plugin/.github/workflows/plugin_action.yaml@next
     secrets:
       PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+    with:
+      python-version: 3.13
