@@ -57,9 +57,10 @@ class ApprisePlugin(NotificationMixin, SettingsMixin, InvenTreePlugin):
         for notifiy_url in url.split(";"):
             apobj.add(notifiy_url)
 
+        name = context.get("name")
+        message = context.get("message")
+
         # Send notification out
-        ret = apobj.notify(
-            body=str(self.context["message"]), title=str(self.context["name"])
-        )
+        ret = apobj.notify(body=str(message), title=str(name))
 
         return bool(ret)
