@@ -14,4 +14,6 @@ jobs:
       python_version: 3.13
     permissions:
       id-token: write
+    secrets:
+      PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
     name: CI
