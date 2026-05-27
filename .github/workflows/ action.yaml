@@ -9,12 +9,9 @@ on:
 
 jobs:
   plugin-action:
-    runs-on: ubuntu-latest
+    uses: matmair/inventree-meta-plugin/.github/workflows/plugin_action.yaml@next
+    with:
+      python_version: 3.13
     permissions:
       id-token: write
-
-    steps:
-      - name: CI
-        uses: matmair/inventree-meta-plugin/.github/workflows/plugin_action.yaml@next
-        with:
-          python_version: 3.13
+    name: CI
