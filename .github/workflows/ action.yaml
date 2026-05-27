@@ -9,9 +9,12 @@ on:
 
 jobs:
   plugin-action:
-    name: CI
-    uses: matmair/inventree-meta-plugin/.github/workflows/plugin_action.yaml@next
-    secrets:
-      PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
-    with:
-      python-version: 3.13
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+
+    steps:
+      - name: CI
+        uses: matmair/inventree-meta-plugin/.github/workflows/plugin_action.yaml@next
+        with:
+          python_version: 3.13
