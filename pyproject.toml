@@ -24,7 +24,7 @@ classifiers=[
     "Topic :: Scientific/Engineering",
     "Framework :: InvenTree",
 ]
-requires-python=">=3.9"
+requires-python=">=3.11"
 dependencies = ['apprise>=1.0.0,<2.0.0']
 
 [project.optional-dependencies]
