@@ -11,6 +11,8 @@ import apprise
 from plugin import InvenTreePlugin, registry
 from plugin.mixins import NotificationMixin, SettingsMixin
 
+from . import PLUGIN_VERSION
+
 # Logger configuration
 logger = logging.getLogger("inventree")
 
@@ -21,6 +23,11 @@ class ApprisePlugin(NotificationMixin, SettingsMixin, InvenTreePlugin):
     NAME = "ApprisePlugin"
     SLUG = "apprise"
     TITLE = "Apprise Notifications"
+    AUTHOR = "Matthias Mair"
+    DESCRIPTION = "Send notifications from InvenTree via Apprise (over 130 services)"
+    WEBSITE = "https://github.com/invenhost/inventree-apprise"
+    VERSION = PLUGIN_VERSION
+
     SETTINGS = {
         "ENABLE_NOTIFICATION_APPRISE": {
             "name": _("Enable apprise notifications"),
