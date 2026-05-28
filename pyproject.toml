@@ -35,7 +35,7 @@ dev = ['twine', 'setuptools']
 "Bug Tracker" = "https://github.com/invenhost/inventree-apprise/issues"
 
 [project.entry-points."inventree_plugins"]
-inventree-apprise = "inventree_apprise.ApprisePlugin:ApprisePlugin"
+inventree-apprise = "inventree_apprise.core:ApprisePlugin"
 
 [tool.setuptools.packages.find]
 where = ["src"]
