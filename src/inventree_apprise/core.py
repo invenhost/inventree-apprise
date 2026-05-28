@@ -23,6 +23,9 @@ class ApprisePlugin(NotificationMixin, SettingsMixin, InvenTreePlugin):
     NAME = "ApprisePlugin"
     SLUG = "apprise"
     TITLE = "Apprise Notifications"
+    AUTHOR = "Matthias Mair"
+    DESCRIPTION = "Send notifications from InvenTree via Apprise (over 130 services)"
+    WEBSITE = "https://github.com/invenhost/inventree-apprise"
     VERSION = PLUGIN_VERSION
 
     SETTINGS = {
@@ -61,8 +64,6 @@ class ApprisePlugin(NotificationMixin, SettingsMixin, InvenTreePlugin):
         for notifiy_url in url.split(";"):
             apobj.add(notifiy_url)
 
-        name = context.get("name")
-        message = context.get("message")
         name = context.get("name")
         message = context.get("message")
 
