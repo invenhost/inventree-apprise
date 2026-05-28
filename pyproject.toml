@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "inventree-apprise"
-version =  "1.3.2"
+dynamic = ["version"]
 description=" Send notifications from InvenTree via Apprise"
 readme = "README.md"
 license = {text = "MIT"}
@@ -35,10 +35,13 @@ dev = ['twine', 'setuptools']
 "Bug Tracker" = "https://github.com/invenhost/inventree-apprise/issues"
 
 [project.entry-points."inventree_plugins"]
-inventree-apprise = "inventree_apprise:ApprisePlugin"
+inventree-apprise = "inventree_apprise.ApprisePlugin:ApprisePlugin"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.dynamic]
+version = {attr = "inventree_apprise.PLUGIN_VERSION"}
 
 [tool.ruff]
 exclude=[".git","__pycache__","dist","build","test.py","tests", "venv","env",".venv",".env"]
