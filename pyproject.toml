@@ -66,5 +66,5 @@ ignore = ['W004']
 
 [dependency-groups]
 dev = [
-    "django>=5.2.15",
+    "django>=5.2.16",
 ]
